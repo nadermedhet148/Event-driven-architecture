@@ -1,9 +1,10 @@
 from config.db import db
+from config.flask_app import app
+from flask_migrate import Migrate
+from Controllers.UserController import UserController 
+
 from models.User import User
 
+migrate = Migrate(app, db)
 
-
-db.session.add(User(username="Flask", email="example@example.com"))
-db.session.commit()
-
-users = User.query.all()
+app.register_blueprint(UserController)
