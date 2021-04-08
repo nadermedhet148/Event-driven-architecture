@@ -16,8 +16,18 @@ def createUser():
     user = User(name=body.get('name'))
     db.session.add(user)
     db.session.commit()
-    publish('events.usrs.created' , UserCreated(user.name, user.id).to_string() )
+    publish('events.users.created' , UserCreated(user.name, user.id).to_string() )
     return {
         "success": True,
+        "data": user.toDict()
+    }
+
+
+@UserController.route('/<userId>',methods=['GET'])
+def getUser(userId):
+    user = User.query.get(userId)
+    return {
+        "success": True,
+        "data": user.toDict()
     }
 
