@@ -1,0 +1,6 @@
+syntax = "proto3";
+import "users_types.proto";
+
+service Users {
+  rpc GetUser (users.GetUserRequest) returns (users.User);
+}
