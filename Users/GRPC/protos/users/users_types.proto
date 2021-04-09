@@ -1,0 +1,13 @@
+syntax = "proto3";
+package users;
+
+message User {
+  string name = 1;
+  uint32 id = 2;
+}
+
+
+message GetUserRequest {
+  uint32 id = 2;
+}
+

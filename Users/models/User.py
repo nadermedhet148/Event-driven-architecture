@@ -6,6 +6,6 @@ class User(db.Model):
 
     def toDict(self):
         return {
-            "userId": user.id,
-            "name" : user.name,
+            "userId": self.id,
+            "name" : self.name,
         }
