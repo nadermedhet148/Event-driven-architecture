@@ -6,3 +6,12 @@ class Order(db.Model):
     productId = db.Column(db.Integer, unique=False, nullable=False)
     totalPrice = db.Column(db.Integer, unique=False, nullable=False)
     totalQuantity = db.Column(db.Integer, unique=False, nullable=False)
+    
+    def toDict(self):
+        return{
+         "id" : self.id,
+         "userId" : self.userId,
+         "productId" : self.productId,
+         "totalPrice" : self.totalPrice,
+         "totalQuantity" : self.totalQuantity,
+        }

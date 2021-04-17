@@ -7,7 +7,6 @@ class ProductService(ProductsServicer):
 
     def GetProduct(self, request, context):
         product = ProductModel.Product.query.get(request.id)
-        print(request.id)
         return Products_types_pb2.Product(
             name=product.name,
             id=product.id ,
