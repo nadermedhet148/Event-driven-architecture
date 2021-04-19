@@ -18,3 +18,22 @@ services:
       POSTGRES_USER : root
     ports:
       - 5432:5432 
+  users-service:
+    container_name: users-service
+    build: 
+      ./Users
+    ports:
+      - "5000:5000"
+      - "50051:50051"
+    environment:
+      WAIT_HOSTS: rabbitmq:5672,db:5432
+  product-service:
+    container_name: product-service
+    build: 
+      ./Products
+    ports:
+      - "5100:5100"
+      - "50052:50052"
+    environment:
+      WAIT_HOSTS: rabbitmq:5672,db:5432
+  

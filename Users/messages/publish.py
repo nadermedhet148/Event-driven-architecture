@@ -5,7 +5,7 @@ import sys
 def publish(channel_name, message):
     credentials = pika.PlainCredentials('root', 'root')
     connection = pika.BlockingConnection(
-        pika.ConnectionParameters(host='localhost', credentials=credentials))
+        pika.ConnectionParameters(host='rabbitmq', credentials=credentials))
         
     channel = connection.channel()
 

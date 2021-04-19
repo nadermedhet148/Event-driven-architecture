@@ -18,6 +18,6 @@ async def serve() -> None:
     await server.wait_for_termination()
 
 
-if __name__ == '__main__':
+def startServer():
     logging.basicConfig(level=logging.INFO)
     asyncio.get_event_loop().run_until_complete(serve())
