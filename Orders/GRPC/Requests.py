@@ -7,13 +7,13 @@ from functools import partial
 
 
 def getUser(userId):
-    channel = grpc.insecure_channel('localhost:50051')
+    channel = grpc.insecure_channel('users-service:50051')
     stub = users_service.UsersStub(channel)
     user = stub.GetUser(users_messages.User(id=userId))
     return user
 
 def getProduct(userId):
-    channel = grpc.insecure_channel('localhost:50052')
+    channel = grpc.insecure_channel('product-service:50052')
     stub = products_service.ProductsStub(channel)
     product = stub.GetProduct(products_messages.Product(id=userId))
     return product
