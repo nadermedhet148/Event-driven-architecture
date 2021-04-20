@@ -33,7 +33,7 @@ def createOrder():
             order.totalQuantity
             )
     publish(
-        'events.order.created' ,
+        'order_created' ,
         event.to_string()
         )
 

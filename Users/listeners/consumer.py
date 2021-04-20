@@ -6,11 +6,11 @@ def consumer(callback, channel_name):
 
     credentials = pika.PlainCredentials('root', 'root')
     connection = pika.BlockingConnection(
-        pika.ConnectionParameters(host='rabbitmq', credentials=credentials))
+        pika.ConnectionParameters(host='127.0.0.1', credentials=credentials))
     channel = connection.channel()
         
 
-    channel.exchange_declare(exchange=channel_name, exchange_type='topic')
+    channel.exchange_declare(exchange=channel_name, exchange_type='fanout')
 
     result = channel.queue_declare(queue='', exclusive=True)
     queue_name = result.method.queue

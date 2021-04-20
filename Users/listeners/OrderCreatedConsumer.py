@@ -8,7 +8,7 @@ import string
 
 def orderCreated(ctedh, method, properties, body):
     event = json.loads(str(body, 'utf-8'))
-    print(event)
+    print(event , 'order_created' )
 
 def orderCreatedConsumer():
-    consumer(channel_name="events.order.created", callback=orderCreated)
+    consumer(channel_name="order_created", callback=orderCreated)

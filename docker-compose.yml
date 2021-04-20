@@ -1,6 +1,8 @@
 version: "3"
 services:
   rabbitmq:
+    network_mode: 'host'
+    hostname: "rabbitmq-host"
     image: rabbitmq:3.8.9-alpine
     container_name: rabbit_mq
     environment:
@@ -11,6 +13,7 @@ services:
       - "5672:5672"
       - "15672:15672"
   db:
+    network_mode: 'host'
     image: postgres:alpine
     restart: always
     environment:
@@ -18,16 +21,17 @@ services:
       POSTGRES_USER : root
     ports:
       - 5432:5432 
-  users-service:
-    container_name: users-service
-    build: 
-      ./Users
-    ports:
-      - "5000:5000"
-      - "50051:50051"
-    environment:
-      WAIT_HOSTS: rabbitmq:5672,db:5432
+  # users-service:
+  #   container_name: users-service
+  #   build: 
+  #     ./Users
+  #   ports:
+  #     - "5000:5000"
+  #     - "50051:50051"
+  #   environment:
+  #     WAIT_HOSTS: rabbitmq:5672,db:5432
   product-service:
+    network_mode: 'host'
     container_name: product-service
     build: 
       ./Products
@@ -35,14 +39,17 @@ services:
       - "5100:5100"
       - "50052:50052"
     environment:
-      WAIT_HOSTS: rabbitmq:5672,db:5432
+      WAIT_HOSTS: 127.0.0.1:5672,127.0.0.1:5432
+      WAIT_BEFORE_HOSTS : 20
   order-service:
+    network_mode: 'host'
     container_name: order-service
     build: 
       ./Orders
     ports:
       - "5300:5300"
     environment:
-      WAIT_HOSTS: rabbitmq:5672,db:5432
+      WAIT_HOSTS: 127.0.0.1:5672,127.0.0.1:5432
+      WAIT_BEFORE_HOSTS : 20
   
   
