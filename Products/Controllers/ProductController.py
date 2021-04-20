@@ -1,9 +1,9 @@
-from config.flask_app import app
+from Config.flask_app import app
 from flask import Blueprint
 from flask import request
-from models.Product import Product
-from config.db import db
-from messages.publish import publish
+from Models.Product import Product
+from Config.db import db
+from Messages.publish import publish
 
 
 ProductController = Blueprint('ProductController', __name__,

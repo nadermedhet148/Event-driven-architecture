@@ -1,7 +1,7 @@
 from GRPC.protosImplantation.products_pb2_grpc import ProductsServicer
 import GRPC.protosImplantation.products_pb2 as Products_types_pb2
 
-import models.Product as ProductModel
+import Models.Product as ProductModel
 
 class ProductService(ProductsServicer):
 
