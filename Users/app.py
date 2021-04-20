@@ -1,17 +1,13 @@
 from config.db import db
 from config.flask_app import app
-# from flask_migrate import Migrate
 from Controllers.UserController import UserController 
 from listeners.OrderCreatedConsumer import orderCreatedConsumer 
 from models.User import User
 import threading
 from GRPCServer import startServer
 
-# migrate = Migrate(app, db)
 
 app.register_blueprint(UserController)
-
-
 
 
 
