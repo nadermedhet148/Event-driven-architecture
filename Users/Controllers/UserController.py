@@ -1,10 +1,10 @@
-from config.flask_app import app
+from Config.flask_app import app
 from flask import Blueprint
 from flask import request
-from models.User import User
-from config.db import db
-from messages.publish import publish
-from Commands.UserCreated import UserCreated
+from Models.User import User
+from Config.db import db
+from Messages.publish import publish
+from Events.outcome.UserCreated import UserCreated
 
 
 UserController = Blueprint('UserController', __name__,

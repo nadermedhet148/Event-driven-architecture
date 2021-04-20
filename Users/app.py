@@ -1,8 +1,7 @@
-from config.db import db
-from config.flask_app import app
+from Config.db import db
+from Config.flask_app import app
 from Controllers.UserController import UserController 
-from listeners.OrderCreatedConsumer import orderCreatedConsumer 
-from models.User import User
+from Messages.listeners.OrderCreatedConsumer import orderCreatedConsumer 
 import threading
 from GRPCServer import startServer
 

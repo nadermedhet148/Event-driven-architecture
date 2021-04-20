@@ -2,7 +2,7 @@ from .consumer import consumer
 import json
 import random
 import string
-from Events.OrderCreated import OrderCreatedEvent
+from Events.income.OrderCreated import OrderCreatedEvent
 
 
 
