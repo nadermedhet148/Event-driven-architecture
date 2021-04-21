@@ -1,11 +1,11 @@
-from config.flask_app import app
+from Config.flask_app import app
 from flask import Blueprint
 from flask import request
-from models.Order import Order
-from config.db import db
+from Models.Order import Order
+from Config.db import db
 from GRPC.Requests import getUser , getProduct
-from messages.publish import publish
-from Commands.OrderCreated import OrderCreated
+from Messages.publish import publish
+from Events.income.OrderCreated import OrderCreated
 from flask.json import jsonify
 
 OrderController = Blueprint('OrderController', __name__,

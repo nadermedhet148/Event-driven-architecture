@@ -1,5 +1,5 @@
-from config.db import db
-from config.flask_app import app
+from Config.db import db
+from Config.flask_app import app
 from Controllers.OrderController import OrderController 
 import threading
 
