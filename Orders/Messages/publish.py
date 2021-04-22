@@ -13,8 +13,8 @@ def publish(channel_name, message):
     try:
         channel.basic_publish(exchange=channel_name, routing_key='', body=message)
         connection.close()
-        print('sent message')
+        print('sent message' , channel_name)
     except Exception as ex:
         print(ex)
-        print('sent message error')
+        print('sent message error',channel_name)
 
