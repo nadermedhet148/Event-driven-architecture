@@ -25,7 +25,7 @@ class OrderService:
                 order.totalQuantity
                 )
         publish(
-            'check_product_quantity' ,
+            'product/order_created' ,
             event.to_string()
             )
         return order
