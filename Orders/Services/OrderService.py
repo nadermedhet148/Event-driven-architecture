@@ -4,7 +4,11 @@ from Messages.publish import publish
 from Commands.CheckProductQuantity import CheckProductQuantity
 
 OrderStatus = {
-    "AWAIT_USER_BALANCE_CHECK" : "AWAIT_USER_BALANCE_CHECK"
+    "AWAIT_PRODUCT_QUANTITY_CHECK" : "AWAIT_PRODUCT_QUANTITY_CHECK", 
+    "AWAIT_USER_BALANCE_CHECK" : "AWAIT_USER_BALANCE_CHECK", 
+    "REJECTED_PRODUCT_CANNOT_ACCEPT" : "REJECTED_PRODUCT_CANNOT_ACCEPT", 
+
+    
 }
     
 
@@ -15,7 +19,7 @@ class OrderService:
             userId= userId,
             productId= productId,
             totalQuantity= quantity ,
-            status= OrderStatus['AWAIT_USER_BALANCE_CHECK']
+            status= OrderStatus['AWAIT_PRODUCT_QUANTITY_CHECK']
         )
         db.session.add(order)
         db.session.commit()
@@ -24,18 +28,20 @@ class OrderService:
                 order.productId,
                 order.totalQuantity
                 )
-        publish(
-            'product/order_created' ,
-            event.to_string()
-            )
+        publish('product/order_created' ,event.to_string())
         return order
 
     def handleProductRejectOrder(self , payload):
-        print(payload , "handleProductRejectOrder")
-
+        order = Order.query.get(payload['orderId'])
+        order.status = OrderStatus['REJECTED_PRODUCT_CANNOT_ACCEPT']
+        db.session.add(order)
+        db.session.commit()
 
     def handleProductAccpetOrder(self, payload):
-        print(payload , "handleProductAccpetOrder")
-        
+        order = Order.query.get(payload['orderId'])
+        order.status = OrderStatus['AWAIT_USER_BALANCE_CHECK']
+        order.totalPrice = payload['price']
+        db.session.add(order)
+        db.session.commit()        
 
 

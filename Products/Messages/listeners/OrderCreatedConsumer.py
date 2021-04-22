@@ -22,19 +22,13 @@ def orderCreated(ctedh, method, properties, body):
         event.productId,
         event.quantity * product.price
         )
-        publish(
-            'order/product_accpet_order' ,
-            event.to_string()
-            )
+        publish('order/product_accpet_order',event.to_string())
     else:
         event = RejectOrder(
         event.orderId,
         event.productId,
         )
-        publish(
-            'order/product_reject_order' ,
-            event.to_string()
-            )
+        publish('order/product_reject_order' ,event.to_string())
     
  
     
