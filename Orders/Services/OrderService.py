@@ -51,7 +51,7 @@ class OrderService:
         order.status = OrderStatus['REJECTED_USER_CANNOT_ACCEPT']
         db.session.add(order)
         db.session.commit()
-        command = RollBackOrderFromProduct(order.id,order.productId)
+        command = RollBackOrderFromProduct(order.id,order.productId,order.totalQuantity)
         publish('product/roll_back_order' ,command.to_string())
 
     def handleUserAccpetOrder(self, payload):

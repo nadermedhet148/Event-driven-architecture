@@ -23,7 +23,7 @@ def orderCreated(ctedh, method, properties, body):
         publish('order/user_accpet_order',event.to_string())
     else:
         event = RejectOrder(event.orderId,event.userId)
-        publish('order/users_reject_order' ,event.to_string())
+        publish('order/user_reject_order' ,event.to_string())
     
     
 def orderCreatedConsumer():
