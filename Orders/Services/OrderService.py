@@ -29,3 +29,13 @@ class OrderService:
             event.to_string()
             )
         return order
+
+    def handleProductRejectOrder(self , payload):
+        print(payload , "handleProductRejectOrder")
+
+
+    def handleProductAccpetOrder(self, payload):
+        print(payload , "handleProductAccpetOrder")
+        
+
+
