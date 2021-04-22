@@ -6,7 +6,6 @@ class OrderCreated:
         self.orderId = orderId 
         self.userId = userId
         self.productId = productId
-        self.totalPrice = totalPrice
         self.quantity = quantity
 
     def to_string(self):

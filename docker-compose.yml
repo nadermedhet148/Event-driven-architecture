@@ -23,15 +23,17 @@ services:
       - 5432:5432 
     volumes:
        - postgres:/data/postgres
-  # users-service:
-  #   container_name: users-service
-  #   build: 
-  #     ./Users
-  #   ports:
-  #     - "5000:5000"
-  #     - "50051:50051"
-  #   environment:
-  #     WAIT_HOSTS: rabbitmq:5672,db:5432
+  users-service:
+    container_name: users-service
+    network_mode: 'host'
+    build: 
+      ./Users
+    ports:
+      - "5000:5000"
+      - "50051:50051"
+    environment:
+      WAIT_HOSTS: 127.0.0.1:5672,127.0.0.1:5432
+      WAIT_BEFORE_HOSTS : 20
   product-service:
     network_mode: 'host'
     container_name: product-service
@@ -43,16 +45,16 @@ services:
     environment:
       WAIT_HOSTS: 127.0.0.1:5672,127.0.0.1:5432
       WAIT_BEFORE_HOSTS : 20
-  order-service:
-    network_mode: 'host'
-    container_name: order-service
-    build: 
-      ./Orders
-    ports:
-      - "5300:5300"
-    environment:
-      WAIT_HOSTS: 127.0.0.1:5672,127.0.0.1:5432
-      WAIT_BEFORE_HOSTS : 20
+  # order-service:
+  #   network_mode: 'host'
+  #   container_name: order-service
+  #   build: 
+  #     ./Orders
+  #   ports:
+  #     - "5300:5300"
+  #   environment:
+  #     WAIT_HOSTS: 127.0.0.1:5672,127.0.0.1:5432
+  #     WAIT_BEFORE_HOSTS : 20
   pgadmin:
     container_name: pgadmin_container
     image: dpage/pgadmin4
