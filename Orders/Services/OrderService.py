@@ -2,6 +2,8 @@ from Models.Order import Order
 from Config.db import db
 from Messages.publish import publish
 from Commands.CheckProductQuantity import CheckProductQuantity
+from Commands.CheckUserBalance import CheckUserBalance
+
 
 OrderStatus = {
     "AWAIT_PRODUCT_QUANTITY_CHECK" : "AWAIT_PRODUCT_QUANTITY_CHECK", 
@@ -23,12 +25,8 @@ class OrderService:
         )
         db.session.add(order)
         db.session.commit()
-        event = CheckProductQuantity(
-                order.id,
-                order.productId,
-                order.totalQuantity
-                )
-        publish('product/order_created' ,event.to_string())
+        command = CheckProductQuantity(order.id,order.productId,order.totalQuantity)
+        publish('product/order_created' ,command.to_string())
         return order
 
     def handleProductRejectOrder(self , payload):
@@ -43,5 +41,7 @@ class OrderService:
         order.totalPrice = payload['price']
         db.session.add(order)
         db.session.commit()        
+        command = CheckUserBalance(order.id,order.userId,order.totalPrice)
+        publish('user/order_created' ,command.to_string())
 
 
