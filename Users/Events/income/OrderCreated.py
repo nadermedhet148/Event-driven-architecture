@@ -7,7 +7,5 @@ class OrderCreatedEvent:
         print(payload)
         self.orderId    = payload["orderId"]
         self.userId     = payload["userId"]
-        self.productId  = payload["productId"]
-        self.totalPrice = payload["totalPrice"]
-        self.quantity   = payload["quantity"]
+        self.totalPrice = payload["price"]
 
