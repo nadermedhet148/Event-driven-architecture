@@ -6,6 +6,7 @@ orderService = OrderService()
 
 def userAccpetOrder(ctedh, method, properties, body):
     payload = json.loads( str(body, 'utf-8'))
+    print('aaaaaaa')
     orderService.handleUserAccpetOrder(payload)
     
  
